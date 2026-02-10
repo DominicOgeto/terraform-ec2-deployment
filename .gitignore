@@ -1,0 +1,27 @@
+# 1. Local Terraform Directories
+.terraform/
+
+# 2. Terraform State Files (Crucial if not using S3, but good practice anyway)
+*.tfstate
+*.tfstate.*
+
+# 3. Sensitive Variable Files
+*.tfvars
+*.tfvars.json
+
+# 4. Local Secret/Environment Files
+.env
+.aws/
+credentials
+*.pem
+
+# 5. Terraform Log files
+crash.log
+*.log
+
+# 6. OS specific files
+.DS_Store
+thumbs.db
+
+#7. Provider.tf
+provider.tf
