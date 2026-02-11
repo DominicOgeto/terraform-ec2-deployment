@@ -1,2 +1,2 @@
-# aws-3-tier-web-app
-Aws 3 tier web application project
+# aws-ec2-deployment
+Deploying an ec2 server in the using terraform
