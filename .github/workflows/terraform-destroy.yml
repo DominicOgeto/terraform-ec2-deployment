@@ -24,4 +24,4 @@ jobs:
 
       - name: Terraform Destroy
         # The -auto-approve flag is mandatory for CI/CD!
-        run: terraform destroy -auto-approve
+        run: terraform destroy -auto-approve -lock=false
