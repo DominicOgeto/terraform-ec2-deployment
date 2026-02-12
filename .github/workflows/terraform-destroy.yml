@@ -8,6 +8,9 @@ jobs:
     runs-on: self-hosted
     env:
       TF_VAR_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
+      TF_VAR_instance_type: "t3.micro"
+      TF_VAR_os: "ami-0b6c6ebed2801a5cb"
+      TF_VAR_name: "test"
 
     steps:
       - name: Checkout Code
