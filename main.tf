@@ -86,7 +86,7 @@ resource "aws_security_group" "test_server_sg" {
 #create a key pair for the server
 resource "aws_key_pair" "test_keypair" {
   key_name   = "ec2_key"
-  public_key = file("~/ec2_key.pub")
+  public_key = var.public_key
 
   tags = {
     Environment = var.name
