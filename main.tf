@@ -58,6 +58,7 @@ resource "aws_instance" "test_server" {
   key_name                    = "ec2_key"
   subnet_id                   = aws_subnet.public.id
   associate_public_ip_address = true
+  vpc_security_group_ids      = [aws_security_group.test_server_sg.id]
 
   tags = {
     Name = "${var.name}-ec2"
