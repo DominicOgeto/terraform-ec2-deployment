@@ -1,9 +1,9 @@
 #create a vpc
 resource "aws_vpc" "test_vpc" {
   cidr_block           = "10.0.0.0/16"
-  instance_tenancy = "default"
-  enable_dns_support   = true 
-  enable_dns_hostnames = true 
+  instance_tenancy     = "default"
+  enable_dns_support   = true
+  enable_dns_hostnames = true
 
   tags = {
     Name = "${var.name}-vpc"
@@ -23,7 +23,7 @@ resource "aws_internet_gateway" "igw" {
 resource "aws_route_table" "public_route" {
   vpc_id = aws_vpc.test_vpc.id
 
-  
+
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.igw.id
@@ -38,7 +38,7 @@ resource "aws_route_table" "public_route" {
 resource "aws_subnet" "public" {
   vpc_id            = aws_vpc.test_vpc.id
   cidr_block        = "10.0.1.0/24"
-  availability_zone = "us-east-1a" 
+  availability_zone = "us-east-1a"
 
   tags = {
     Name = "${var.name}-public-subnet"
@@ -53,10 +53,10 @@ resource "aws_route_table_association" "public" {
 
 #create ec2 instance 
 resource "aws_instance" "test_server" {
-  ami           = var.os
-  instance_type = var.instance_type
-  key_name = "ec2_key"
-  subnet_id     = aws_subnet.public.id
+  ami                         = var.os
+  instance_type               = var.instance_type
+  key_name                    = "ec2_key"
+  subnet_id                   = aws_subnet.public.id
   associate_public_ip_address = true
 
   tags = {
@@ -74,13 +74,12 @@ resource "aws_security_group" "test_server_sg" {
     for_each = local.ingress_rule
 
     content {
-        from_port = ingress.value.port
-        to_port = ingress.value.port
-        protocol = ingress.value.protocol
-        cidr_blocks = ingress.value.cidr_blocks
-        description = ingress.value.description
+      from_port   = ingress.value.port
+      to_port     = ingress.value.port
+      protocol    = ingress.value.protocol
+      cidr_blocks = ingress.value.cidr_blocks
+      description = ingress.value.description
     }
-    
   }
 }
 
@@ -88,7 +87,7 @@ resource "aws_security_group" "test_server_sg" {
 resource "aws_key_pair" "test_keypair" {
   key_name   = "ec2_key"
   public_key = file("~/ec2_key.pub")
-  
+
   tags = {
     Environment = var.name
   }
